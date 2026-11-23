@@ -1,0 +1,14 @@
+{
+  "name": "museflow-studio",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Original instrumental composer with 30-minute tracks, a 35-style music library and originality controls",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/*.test.js",
+    "build:catalog": "node scripts/build-catalog.js"
+  }
+}
