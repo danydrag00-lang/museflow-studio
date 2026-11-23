@@ -1,0 +1,42 @@
+name: Build original MP3 library
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ambient-engine.js'
+      - 'scripts/build-catalog.js'
+      - '.github/workflows/build-catalog.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: museflow-catalog-build
+  cancel-in-progress: false
+jobs:
+  generate-mp3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Create missing MP3 instrumentals
+        run: npm run build:catalog
+      - name: Commit generated catalogue music to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/catalog-audio/*.mp3
+          if git diff --staged --quiet; then
+            echo "All 35 catalogue tracks already present."
+          else
+            git commit -m "Add 35 original synthesized instrumental MP3 tracks"
+            git push
+          fi
