@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0c14"><title>Museflow Studio — Make sound your own</title>
+<meta name="description" content="Create original instrumentals, thirty-minute soundtracks and free music for commercial projects.">
+<style>
+:root{--bg:#0b0c14;--panel:#131520;--panel2:#1b1d2b;--line:#2c2e3e;--ink:#f7f3ff;--soft:#a2a1b4;--accent:#c49bff;--accent2:#8be6c8;--radius:18px;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse 600px 500px at 65% -20%,#32204c80,transparent),var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}a{color:var(--accent)}
+.shell{display:grid;grid-template-columns:244px minmax(0,1fr);min-height:100vh}.aside{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);padding:26px 18px;display:flex;flex-direction:column;gap:28px;background:#0c0d16e8}
+.brand{display:flex;gap:12px;align-items:center;padding:6px 10px;font-size:20px;font-weight:760;letter-spacing:-.7px}.logo{display:grid;place-items:center;width:34px;height:34px;border-radius:11px;color:#15111e;background:linear-gradient(130deg,#ddbdff,#90eed2);font-size:23px}
+.aside nav{display:grid;gap:8px}.nav-btn{display:flex;gap:13px;align-items:center;width:100%;padding:12px 14px;background:transparent;color:var(--soft);border:1px solid transparent;border-radius:12px;text-align:left}.nav-btn:hover,.nav-btn.active{background:#29213b;color:white;border-color:#443554}.nav-btn span{font-size:18px}
+.note{margin-top:auto;border:1px solid var(--line);background:#171926;border-radius:16px;padding:16px;font-size:12px;color:var(--soft)}.note strong{display:block;color:#fff;font-size:13px;margin-bottom:8px}
+main{max-width:1440px;width:100%;padding:40px clamp(20px,4.5vw,72px) 130px;margin:0 auto}.eyebrow{text-transform:uppercase;font-size:11px;letter-spacing:2.8px;font-weight:750;color:var(--accent2)}
+h1{font-size:clamp(36px,5vw,60px);line-height:1.08;letter-spacing:-2.8px;margin:13px 0 13px}h1 em{font-style:normal;background:linear-gradient(90deg,#e0b4ff,#91dce7);color:transparent;background-clip:text}
+h2{font-size:25px;letter-spacing:-.8px;margin:0 0 10px}h3{font-size:16px;margin:0 0 8px}.sub{color:var(--soft);max-width:670px;font-size:16px;margin:0 0 30px}
+.hero{padding:36px 38px;background:radial-gradient(ellipse at 95% 10%,#6c3db04d,transparent 50%),linear-gradient(125deg,#1b1a2b,#121521);border:1px solid #393048;border-radius:24px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;pointer-events:none;right:30px;top:20px;width:200px;height:130px;opacity:.38;border-radius:45%;background:repeating-radial-gradient(ellipse at 50% 50%,transparent 0 12px,#c0aaff 13px 14px,transparent 15px 23px);transform:rotate(-16deg)}
+.hero>*{position:relative;z-index:1}.hero p{max-width:520px;color:var(--soft)}
+.panel{padding:25px;border:1px solid var(--line);background:linear-gradient(145deg,#1a1c2b,#141521);border-radius:22px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:22px}.stack{display:grid;gap:20px}
+.field{display:grid;gap:9px;margin-bottom:20px}.field label{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:650}
+textarea,input,select{width:100%;background:#111320;border:1px solid #393849;color:white;border-radius:12px;padding:13px 14px;outline:none;min-width:0}
+textarea{resize:vertical;min-height:130px;line-height:1.65}
+textarea:focus,input:focus,select:focus{border-color:#b69de7;box-shadow:0 0 0 3px #a788df28}
+small,.muted{color:var(--soft);font-size:12px}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.chip{border:1px solid #424053;background:#252434;color:#c9c5da;padding:8px 13px;border-radius:40px;font-size:12px}.chip:hover,.chip.active{background:#473363;color:white;border-color:#9477bd}
+.btn{border:1px solid var(--line);border-radius:12px;padding:12px 18px;background:#29293b;color:var(--ink);font-weight:700;display:inline-flex;gap:9px;align-items:center;justify-content:center;text-decoration:none}
+.btn:hover{filter:brightness(1.12)}.btn.primary{background:linear-gradient(120deg,#ddbcff,#a6c6f4);border-color:transparent;color:#14121f}.btn.secondary{background:transparent}.btn.small{padding:8px 11px;font-size:12px}
+.btn.wide{width:100%}.stat{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--soft)}.dot{width:7px;height:7px;border-radius:50%;background:#8ae4be}
+.cover{height:112px;border-radius:13px;background:radial-gradient(circle at 70% 25%,#dfb0e560,transparent 35%),radial-gradient(circle at 20% 80%,#6d95ff90,transparent 48%),linear-gradient(140deg,#29233c,#202839);display:grid;place-items:center;font-size:42px}
+.card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.music-card{border:1px solid var(--line);background:#191a28;border-radius:16px;padding:12px;min-width:0}.music-card:hover{border-color:#725b9b}
+.music-card .title{font-weight:750;margin:10px 0 2px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.music-card .genre{font-size:12px;color:var(--soft)}.music-card .actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.pill{background:#262238;border:1px solid #464059;border-radius:99px;padding:4px 9px;font-size:11px;color:#d4c2ea}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.mini{border:1px solid var(--line);padding:17px;border-radius:14px;background:#141522}.mini b{display:block;font-size:23px;margin-top:4px}
+.sectionbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 20px}.search{width:min(380px,100%)}
+.hidden{display:none!important}.tip{background:#191928;border:1px solid var(--line);border-radius:12px;padding:15px;color:var(--soft);font-size:13px}
+.tip strong{color:var(--ink)}.notice{padding:13px 15px;border-radius:10px;background:#21302d;color:#b8f5e1;border:1px solid #385f53;font-size:13px;margin-top:15px}
+.error{background:#382633;border-color:#76435d;color:#ffd0db}.listening{position:fixed;bottom:0;left:244px;right:0;z-index:20;display:flex;align-items:center;gap:16px;padding:13px 30px;border-top:1px solid #474058;background:#181724f5;backdrop-filter:blur(16px)}
+.listen-cover{width:44px;height:44px;border-radius:10px;background:linear-gradient(140deg,#b785eb,#5a91b5);display:grid;place-items:center}.listen-copy{min-width:160px;max-width:300px;flex:1}.listen-copy b{display:block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+audio{flex:2;min-width:140px;height:40px}progress{width:100%;height:9px;accent-color:#b998ed}.empty{border:1px dashed #51445f;border-radius:16px;padding:38px;text-align:center;color:var(--soft)}
+@media(max-width:1120px){.card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr}.aside{width:200px}.shell{grid-template-columns:200px minmax(0,1fr)}.listening{left:200px}}
+@media(max-width:740px){.shell{display:block}.aside{position:static;height:auto;width:100%;padding:12px 16px;gap:10px}.aside nav{display:flex;overflow:auto}.nav-btn{width:auto;white-space:nowrap}.note{display:none}main{padding:23px 16px 145px}.hero{padding:27px 22px}.hero:after{display:none}.panel{padding:18px}.card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.listening{left:0;flex-wrap:wrap;padding:10px 16px}.listen-copy{flex:1;max-width:unset}audio{flex-basis:100%}}
+@media(max-width:430px){.card-grid{grid-template-columns:1fr}.split{grid-template-columns:1fr}}
+</style></head><body>
+<div class="shell"><aside class="aside">
+ <div class="brand"><div class="logo">♪</div>Museflow<span style="font-size:10px;color:var(--accent);align-self:flex-end">STUDIO</span></div>
+ <nav aria-label="Sections">
+ <button class="nav-btn active" data-tab="create"><span>✦</span> Create music</button>
+ <button class="nav-btn" data-tab="catalog"><span>♫</span> Free music</button>
+ <button class="nav-btn" data-tab="library"><span>▤</span> My library</button>
+ <button class="nav-btn" data-tab="about"><span>◎</span> About & licence</button>
+ </nav>
+ <div class="note"><strong>Independent studio</strong>Original procedural instrumentals, made without third-party sound samples. Audio similarity checks reduce repeats but cannot guarantee worldwide copyright uniqueness.</div>
+ </aside>
+<main>
+<section id="create" class="tab">
+ <div class="hero"><div class="eyebrow">CREATE WITHOUT LIMITS</div><h1>Make sound<br><em>your own.</em></h1><p>Describe your mood and produce original instrumental compositions—up to 30 minutes long. Save every take in your library.</p><div class="row"><span class="pill">✦ Original instrumentals</span><span class="pill">◴ Up to 30 minutes</span><span class="pill">♬ Multiple takes</span></div></div>
+ <div class="grid"><div class="panel">
+ <h2>New composition</h2><p class="muted">Start with an idea. Museflow creates an evolving, original procedural soundtrack.</p>
+ <div class="field"><label for="title">Track title</label><input id="title" value="Moonlit Sanctuary" placeholder="Name your track"></div>
+ <div class="field"><label for="prompt">Describe the music <span class="muted">Instruments, feeling, atmosphere</span></label><textarea id="prompt">Deeply relaxing meditation music, soft shimmering pads, delicate floating melodies, warm atmospheric space, gentle and peaceful, instrumental only.</textarea></div>
+ <div class="field"><label>Quick inspiration</label><div class="row" id="suggestions"></div></div>
+ <div class="split">
+ <div class="field"><label for="mood">Mood</label><select id="mood"><option value="sleep">Deep sleep</option><option value="spa">Spa & meditation</option><option value="rain">Rain / nature</option><option value="lofi">Lo-fi focus</option><option value="piano">Piano-inspired</option><option value="cinematic">Cinematic</option><option value="ambient">Ambient</option></select></div>
+ <div class="field"><label for="duration">Track duration</label><select id="duration"><option value="30">30 seconds</option><option value="60">1 minute</option><option value="120">2 minutes</option><option value="300">5 minutes</option><option value="600">10 minutes</option><option value="900">15 minutes</option><option value="1800">30 minutes ★</option></select></div>
+ </div>
+ <div class="field"><label for="versions">How many unique takes?</label><select id="versions"><option value="1">1 composition</option><option value="2">2 different takes</option><option value="3">3 different takes</option><option value="4">4 different takes</option></select></div>
+ <div class="row" style="margin-bottom:15px"><span class="pill">✓ Instrumental</span><span class="pill">✓ Unique random seed</span><span class="pill">✓ Audio duplicate check</span></div>
+ <button class="btn primary wide" id="generate">✦ Generate original music</button>
+ <p class="muted">Free composer: algorithmic synthesis (not a cloud AI model). Longer audio takes more processing. MP3 if FFmpeg is installed; otherwise WAV.</p>
+ <div id="job" class="hidden"><div class="notice"><b id="jobstage">Starting</b><div style="margin:10px 0"><progress id="progress" max="100" value="0"></progress></div><span id="jobpct">0%</span></div></div>
+ <div id="msg" role="status"></div>
+ </div><div class="stack">
+ <div class="panel"><div class="eyebrow">YOUR MUSIC WORKSPACE</div><h3 style="margin-top:12px">Create. Listen. Download.</h3><div class="stats-grid"><div class="mini"><small>Music library</small><b id="trackcount">0</b></div><div class="mini"><small>Free instrumentals</small><b>35</b></div></div><div class="tip" style="margin-top:12px">Use a 30-minute soundtrack for sleep, meditation, yoga, and long videos. The arrangement gradually changes rather than looping a short clip.</div></div>
+ <div class="panel"><div class="eyebrow">ORIGINALITY FIRST</div><h3 style="margin-top:12px">Fresh compositions</h3><p class="muted">Every take gets a secure random seed. The generator varies its melody and harmonic progressions over time, then checks the audio SHA-256 fingerprint for exact duplicates in your own library.</p><p class="muted">This does not certify global copyright originality or exclusivity.</p></div>
+ </div></div>
+</section>
+<section id="catalog" class="tab hidden">
+ <div class="eyebrow">YOUR FREE MUSIC COLLECTION</div><h1>Find your <em>sound.</em></h1><p class="sub">35 original synthesized instrumentals across seven moods. Play, download or use a style as the starting point for a fresh 30-minute composition.</p>
+ <div class="sectionbar"><div class="row" id="filters"></div><input class="search" id="search" placeholder="Search free instrumentals..." aria-label="Search the library"></div>
+ <div class="card-grid" id="catalogcards"></div>
+</section>
+<section id="library" class="tab hidden"><div class="eyebrow">YOUR COMPOSITIONS</div><h1>My <em>library.</em></h1><p class="sub">Listen to and download your saved original takes. Songs are stored on this server, not in GitHub or your browser.</p><div class="sectionbar"><div id="librarycount" class="stat">Loading tracks</div><button class="btn small" id="refresh">↻ Refresh</button></div><div class="card-grid" id="librarycards"></div></section>
+<section id="about" class="tab hidden"><div class="eyebrow">HOW MUSEFLOW WORKS</div><h1>Music with <em>clarity.</em></h1><div class="panel" style="max-width:760px">
+<h2>What this studio can do</h2><p>Museflow generates original algorithmic audio with synthesized pads, melodic patterns and optional electronic rhythms. It does not use existing copyrighted recordings, playlists or sample packs.</p>
+<h3>What “free commercial use” means</h3><p>The included original synthesized instrumentals are offered for nonexclusive personal and commercial creative projects, including monetized YouTube videos. <a href="/MUSIC_LICENSE.txt" target="_blank" rel="noopener">Read the music licence</a>.</p>
+<h3>Originality safeguards</h3><p>New seeds, shifting harmonic arrangements and SHA-256 exact-file checks reduce repetition against tracks produced in this studio. A new seed does not guarantee that music is different from everything ever composed; fingerprint checks catch identical files, not every similar melody.</p>
+<h3>Audio formats and availability</h3><p>Install FFmpeg for MP3 encoding. Without FFmpeg, compositions export as WAV. The bundled free catalogue is composed on first playback or by the repository's catalogue-build workflow.</p>
+<h3>Private by default</h3><p>This local web app runs on 127.0.0.1 unless you explicitly configure public hosting. Generated files and the track index are stored in the server's <code>data/</code> folder.</p>
+</div></section>
+</main></div>
+<div id="listen" class="listening hidden"><div class="listen-cover">♫</div><div class="listen-copy"><b id="nowTitle">Now playing</b><small id="nowMood">Instrumental</small></div><audio id="audio" controls preload="none"></audio><button class="btn small secondary" id="closeplayer" aria-label="Close audio player">✕</button></div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id),html=(s)=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const examples=[
+ ['Deep sleep','Deep peaceful sleep music, soft floating pads, sparse delicate melody, restful night ambience','sleep'],
+ ['Rainy evening','Gentle synthesized rain textures and distant dreamy piano, calming and atmospheric','rain'],
+ ['Luxury spa','Premium spa meditation instrumental, airy bell-like phrases, warm ambient harmony','spa'],
+ ['Lo-fi study','Mellow lo-fi beat, warm soft electronic keys, relaxing late-night study atmosphere','lofi'],
+ ['Piano reflections','Tender piano-inspired electronic melody, slow and emotional, quietly hopeful','piano'],
+ ['Cinematic dawn','Hopeful cinematic instrumental with gentle pulses and spacious rising chords','cinematic']
+];
+const state={catalog:[],library:[],filter:'all',query:'',poll:null};
+function status(message,bad=false){$('msg').innerHTML=message?'<div class="notice '+(bad?'error':'')+'">'+html(message)+'</div>':'';}
+async function api(url,options){const r=await fetch(url,options);let x;try{x=await r.json();}catch{x={error:'Unexpected server response'}}if(!r.ok)throw Error(x.error||'Request failed');return x;}
+function show(tab){
+ for(const el of document.querySelectorAll('.tab'))el.classList.toggle('hidden',el.id!==tab);
+ for(const b of document.querySelectorAll('[data-tab]'))b.classList.toggle('active',b.dataset.tab===tab);
+ if(tab==='library')loadLibrary();
+}
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab)));
+$('suggestions').innerHTML=examples.map(([label],i)=>'<button class="chip" data-suggestion="'+i+'">'+html(label)+'</button>').join('');
+$('suggestions').onclick=e=>{const b=e.target.closest('[data-suggestion]');if(!b)return;const ex=examples[Number(b.dataset.suggestion)];$('prompt').value=ex[1];$('mood').value=ex[2];};
+function play(title,mood,url){
+ $('listen').classList.remove('hidden');$('nowTitle').textContent=title;$('nowMood').textContent=mood;
+ const player=$('audio');player.src=url;player.load();player.play().catch(()=>{});
+}
+$('closeplayer').onclick=()=>{$('audio').pause();$('listen').classList.add('hidden');};
+function card(t,isCatalog=false){
+ const mood=html(t.mood),name=html(t.title),length=t.durationSec?Math.ceil(t.durationSec/60)+' min':'';
+ const url=isCatalog?t.audioUrl:'/api/tracks/'+encodeURIComponent(t.id)+'/audio';
+ return '<article class="music-card"><div class="cover" aria-hidden="true">♫</div><div class="title" title="'+name+'">'+name+'</div><div class="genre">'+html(t.genre||t.mood)+' · '+html(length)+'</div><div class="actions">'+
+ '<button class="btn small" data-play="'+encodeURIComponent(t.id)+'" data-source="'+(isCatalog?'catalog':'library')+'">▶ Play</button>'+
+ '<a class="btn small secondary" href="'+url+'" download="'+encodeURIComponent(t.title)+'.'+(t.format||'mp3')+'">↓ Download</a>'+
+ (isCatalog?'<button class="btn small secondary" data-style="'+encodeURIComponent(t.id)+'">30-min version</button>':'')+
+ '</div></article>';
+}
+function renderCatalog(){
+ const q=state.query.toLowerCase().trim();
+ const arr=state.catalog.filter(t=>(state.filter==='all'||t.mood===state.filter)&&(!q||[t.title,t.genre,t.description,t.mood].join(' ').toLowerCase().includes(q)));
+ $('catalogcards').innerHTML=arr.length?arr.map(t=>card(t,true)).join(''):'<div class="empty">No tracks match this search.</div>';
+ document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter===state.filter));
+}
+$('filters').innerHTML=['all','sleep','spa','rain','lofi','piano','cinematic','ambient'].map(t=>'<button class="chip" data-filter="'+t+'">'+html(t==='all'?'All music':t==='lofi'?'Lo-fi':t.charAt(0).toUpperCase()+t.slice(1))+'</button>').join('');
+$('filters').onclick=e=>{const b=e.target.closest('[data-filter]');if(b){state.filter=b.dataset.filter;renderCatalog();}};
+$('search').oninput=e=>{state.query=e.target.value;renderCatalog();};
+$('catalogcards').onclick=e=>handleCardClick(e,true);
+$('librarycards').onclick=e=>handleCardClick(e,false);
+function handleCardClick(e,isCatalog){
+ const s=e.target.closest('[data-style]');
+ if(s){const t=state.catalog.find(t=>t.id===decodeURIComponent(s.dataset.style));if(!t)return;
+  $('title').value=t.title+' — Extended';$('prompt').value=t.prompt+' Develop an evolving arrangement with fresh melodic ideas.';$('mood').value=t.mood;$('duration').value='1800';show('create');scrollTo({top:0,behavior:'smooth'});return;}
+ const p=e.target.closest('[data-play]');if(!p)return;
+ const t=(p.dataset.source==='catalog'?state.catalog:state.library).find(t=>t.id===decodeURIComponent(p.dataset.play));if(!t)return;
+ const url=isCatalog?t.audioUrl:'/api/tracks/'+encodeURIComponent(t.id)+'/audio';
+ play(t.title,t.mood,url);
+}
+async function loadCatalog(){try{state.catalog=(await api('/api/catalog')).tracks;renderCatalog();}catch(e){$('catalogcards').innerHTML='<div class="empty">'+html(e.message)+'</div>';}}
+async function loadLibrary(){try{state.library=(await api('/api/library')).tracks;$('trackcount').textContent=state.library.length;
+ $('librarycount').textContent=state.library.length+' saved composition'+(state.library.length===1?'':'s');
+ $('librarycards').innerHTML=state.library.length?state.library.map(t=>card(t)).join(''):'<div class="empty">Your saved music will appear here. Create your first composition to begin.</div>';
+ }catch(e){$('librarycards').innerHTML='<div class="empty">'+html(e.message)+'</div>';}}
+$('refresh').onclick=loadLibrary;
+$('generate').onclick=async()=>{
+ const button=$('generate');button.disabled=true;status('');
+ const payload={title:$('title').value,prompt:$('prompt').value,mood:$('mood').value,durationSec:Number($('duration').value),versions:Number($('versions').value)};
+ try{
+  const job=await api('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  $('job').classList.remove('hidden');$('jobstage').textContent='Queued';$('progress').value=0;
+  if(state.poll)clearInterval(state.poll);
+  const check=async()=>{
+   try{const j=await api('/api/jobs/'+job.jobId);
+     $('jobstage').textContent=j.stage;$('progress').value=j.progress;$('jobpct').textContent=j.progress+'%';
+     if(j.status==='completed'||j.status==='failed'){
+       clearInterval(state.poll);state.poll=null;button.disabled=false;
+       if(j.status==='failed')status(j.error||'Generation failed',true);
+       else{status(j.tracks.length+' original composition(s) saved to your library.');await loadLibrary();}
+     }
+   }catch(e){clearInterval(state.poll);state.poll=null;button.disabled=false;status(e.message,true);}
+  };
+  await check();if(state.poll===null&&button.disabled)state.poll=setInterval(check,1200);
+ }catch(e){button.disabled=false;status(e.message,true);}
+};
+Promise.all([loadCatalog(),loadLibrary()]).catch(()=>{});
+</script>
+</body></html>
