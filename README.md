@@ -20,34 +20,34 @@ A standalone original-music website, inspired by modern music-creation workspace
 2. On this repository page, choose **Code → Download ZIP** and unzip the folder.
 3. Open Terminal and enter the extracted folder. For example:
 
-   \`\`\`bash
+   ```bash
    cd ~/Downloads/museflow-studio-main
    node server.js
-   \`\`\`
+   ```
 
 4. In a browser open **http://127.0.0.1:4173**.
 
-You can also run \`bash start.command\` from the extracted directory.
+You can also run `bash start.command` from the extracted directory.
 
 The studio uses only Node's built-in libraries, so **npm install is not required**.
 
 ### MP3 versus WAV
 
-- Installing **FFmpeg** is recommended for MP3 exports: \`brew install ffmpeg\` (if you have Homebrew).
+- Installing **FFmpeg** is recommended for MP3 exports: `brew install ffmpeg` (if you have Homebrew).
 - Without FFmpeg, the composer can export WAV.
 - The catalogue is playable on demand. If the 35 MP3 assets have not yet been built, the server synthesizes missing tracks when first requested.
 
 ## Free commercial-use music
 
-The bundled MP3 catalogue is built automatically with [GitHub Actions](.github/workflows/build-catalog.yml) and committed to \`public/catalog-audio/\`. This workflow takes longer than ordinary checks because it renders 35 real audio files.
+The bundled MP3 catalogue is built automatically with [GitHub Actions](.github/workflows/build-catalog.yml) and committed to `public/catalog-audio/`. This workflow takes longer than ordinary checks because it renders 35 real audio files.
 
 View progress in the **Actions → Build original MP3 library** tab. You can also start it manually with **Run workflow**. If the workflow cannot push audio files due to repository permissions, go to **Settings → Actions → General → Workflow permissions**, allow **Read and write permissions**, and rerun the workflow.
 
 To build locally (requires FFmpeg):
 
-\`\`\`bash
+```bash
 npm run build:catalog
-\`\`\`
+```
 
 Please read [MUSIC_LICENSE.txt](public/MUSIC_LICENSE.txt) before commercially distributing music. Do not register the shared instrumental catalogue in Content ID as exclusively yours.
 
@@ -59,20 +59,20 @@ Generated takes receive fresh secure random seeds. The synthesizer varies melody
 
 | Path | Purpose |
 | --- | --- |
-| \`server.js\` | Local Node server and generation job API |
-| \`ambient-engine.js\` | Standalone procedural music engine |
-| \`public/index.html\` | Responsive interface and web player |
-| \`public/catalog-audio/\` | 35 generated catalog MP3s |
-| \`scripts/build-catalog.js\` | Reproducible catalog builder |
-| \`data/\` | Local generated song files (not committed) |
-| \`tests/\` | Node test suite |
-| \`.github/workflows/\` | Automated tests and MP3 build |
+| `server.js` | Local Node server and generation job API |
+| `ambient-engine.js` | Standalone procedural music engine |
+| `public/index.html` | Responsive interface and web player |
+| `public/catalog-audio/` | 35 generated catalog MP3s |
+| `scripts/build-catalog.js` | Reproducible catalog builder |
+| `data/` | Local generated song files (not committed) |
+| `tests/` | Node test suite |
+| `.github/workflows/` | Automated tests and MP3 build |
 
 ### Test
 
-\`\`\`bash
+```bash
 npm test
-\`\`\`
+```
 
 ### Hosting limitations
 
@@ -80,4 +80,4 @@ GitHub stores the **source code and catalogue**. GitHub Pages alone cannot execu
 
 ### Existing saved music
 
-If you previously used another Museflow installation, back up its entire \`data/\` directory before replacing files. Do not overwrite that directory with a new download if it contains your music.
+If you previously used another Museflow installation, back up its entire `data/` directory before replacing files. Do not overwrite that directory with a new download if it contains your music.
