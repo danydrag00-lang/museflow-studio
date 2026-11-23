@@ -38,5 +38,7 @@ jobs:
             echo "All 35 catalogue tracks already present."
           else
             git commit -m "Add 35 original synthesized instrumental MP3 tracks"
-            git push
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
           fi
